@@ -1,7 +1,7 @@
 import google.genai as genai
 import streamlit as st
 
-GOOGLE_API_KEY = st.secrets("GOOGLE_API_KEY")
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 client = genai.Client(api_key= GOOGLE_API_KEY)
 
 st.set_page_config(
@@ -9,8 +9,8 @@ st.set_page_config(
  page_icon= "💪",
  layout= "centered"
 )
-
-st.write("calculate your BMI and receive personalized AI Health advice.")
+st.title("AI Diet Planner & Fitness Advisor")
+st.write("Calculate your BMI and receive personalized AI Health advice.")
 
 st.divider()
 gender = st.selectbox("Gender:", ["Male", "Female"])
@@ -47,8 +47,9 @@ prompt = f'''You are an expert nutritionist and fitness coach. User details: Age
 8. Foods to Avoid
 9. Daily Tips
 Keep your response easy to understand.'''
-st.subheader("AI Diet Plan")
-st.write("Analyzing your BMI with AI...")
+
+if st.button('AI Diet Plan:'):
+ st.write("Analyzing your BMI with AI...")
 
 response = client.models.generate_content(
         model="gemini-3.5-flash",
