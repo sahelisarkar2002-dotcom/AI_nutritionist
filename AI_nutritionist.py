@@ -4,7 +4,7 @@ import streamlit as st
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 client = genai.Client(api_key= GOOGLE_API_KEY)
 
-st.title("AI Diet Planner & Fitness Advisor")
+st.title("🥗💪AI Diet Planner & Fitness Advisor")
 st.write("Calculate your BMI and receive personalized AI Health advice.")
 
 st.divider()
