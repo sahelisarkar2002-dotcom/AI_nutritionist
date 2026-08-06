@@ -1,9 +1,9 @@
 import google.genai as genai
 import streamlit as st
 
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-client = genai.Client(api_key= GOOGLE_API_KEY)
+GOOGLE_API_KEY =st.secrets("GOOGLE_API_KEY")
 
+client = genai.Client(api_key= GOOGLE_API_KEY)
 st.set_page_config(
  page_title= "BMI Calculator with AI Nutritionist",
  page_icon= "💪",
@@ -52,6 +52,6 @@ if st.button('AI Diet Plan:'):
  st.write("Analyzing your BMI with AI...")
 
 response = client.models.generate_content(
-        model="gemini-3.5-flash",
+        model="gemini-3.6-flash",
         contents=prompt)
 st.write(response.text)
