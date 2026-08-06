@@ -2,13 +2,8 @@ import google.genai as genai
 import streamlit as st
 
 GOOGLE_API_KEY =st.secrets("GOOGLE_API_KEY")
-
 client = genai.Client(api_key= GOOGLE_API_KEY)
-st.set_page_config(
- page_title= "BMI Calculator with AI Nutritionist",
- page_icon= "💪",
- layout= "centered"
-)
+
 st.title("AI Diet Planner & Fitness Advisor")
 st.write("Calculate your BMI and receive personalized AI Health advice.")
 
