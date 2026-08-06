@@ -1,7 +1,7 @@
 import google.genai as genai
 import streamlit as st
 
-GOOGLE_API_KEY = st.secrets("GOOGLE_API_KEY")
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 client = genai.Client(api_key= GOOGLE_API_KEY)
 
 st.title("AI Diet Planner & Fitness Advisor")
