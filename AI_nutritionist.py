@@ -2,8 +2,6 @@ import streamlit as st
 import openai as openai
 from openai import OpenAI
 
-NVIDIA_API_KEY = "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"
-
 client = OpenAI(
 api_key= st.secrets["NVIDIA_API_KEY"],
 base_url="https://integrate.api.nvidia.com/v1"
