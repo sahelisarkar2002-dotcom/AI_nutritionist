@@ -1,15 +1,19 @@
-import google.genai as genai
 import streamlit as st
+import openai as openai
+from openai import OpenAI
 
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-client = genai.Client(api_key= GOOGLE_API_KEY)
+NVIDIA_API_KEY = "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"
 
+client = OpenAI(
+api_key= st.secrets["NVIDIA_API_KEY"],
+base_url="https://integrate.api.nvidia.com/v1"
+)
 st.title("AI Diet Planner & Fitness Advisor")
 st.write("Calculate your BMI and receive personalized AI Health advice.")
 
 st.divider()
 gender = st.selectbox("Gender:", ["Male", "Female"])
-age = st.number_input("Enter Age:")
+age = st.slider("Enter your Age:", 1, 100, 1)
 wt = st.slider("Enter your weight in kilograms:", 1.0, 200.00, 70.0)
 ht = st.slider("Enter your height in meters:", 1.0, 2.5, 1.7)
 
@@ -44,9 +48,13 @@ prompt = f'''You are an expert nutritionist and fitness coach. User details: Age
 Keep your response easy to understand.'''
 
 if st.button('AI Diet Plan:'):
- st.write("Analyzing your BMI with AI...")
+ st.spinner("Generating your personalized Diet Plan...")
 
-response = client.models.generate_content(
-        model="gemini-3.5-flash",
-        contents=prompt)
-st.write(response.text)
+response = client.chat.completions.create(
+model="meta/llama-3.1-70b-instruct",
+messages=[
+{"role": "user", "content": prompt}
+]
+)
+
+st.write(response.choices[0].message.content)
