@@ -46,13 +46,15 @@ prompt = f'''You are an expert nutritionist and fitness coach. User details: Age
 Keep your response easy to understand.'''
 
 if st.button('AI Diet Plan:'):
- st.spinner("Generating your personalized Diet Plan...")
+ with st.spinner("Generating your personalized Diet Plan..."):
+   response = client.chat.completions.create(
+            model="meta/llama-3.1-70b-instruct",
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
+        )
 
-response = client.chat.completions.create(
-model="meta/llama-3.1-70b-instruct",
-messages=[
-{"role": "user", "content": prompt}
-]
-)
+st.write(response.choices[0].message.content)
+
 
 st.write(response.choices[0].message.content)
